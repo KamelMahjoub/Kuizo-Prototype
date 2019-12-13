@@ -59,4 +59,41 @@ public class DbAdapter extends SQLiteOpenHelper {
         return user;
     }
 
+    Boolean checkUserHasAccount(String user , String pass)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from users where username = '"+user+"' and password = '"+pass+"' ;",null);
+        if(cursor.getCount()>0)
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+
+
+    Boolean checkUserExists(String user)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from users where username = '"+user+"';",null);
+        if(cursor.getCount()>0)
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+
+    void updateStats(int score , int nbqs , String user)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues data=new ContentValues();
+        data.put(Col_NBCorrectAnswers,score);
+        data.put(Col_NBQuestionsAnswered,nbqs);
+        db.update(TABLE_USERS, data, "username=" +"'"+user+"'", null);
+    }
+
+
+
+
 }

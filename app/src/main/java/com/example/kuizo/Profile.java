@@ -11,15 +11,18 @@ import com.example.kuizo.R;
 
 import org.w3c.dom.Text;
 
-public class Profile extends AppCompatActivity {
+import java.io.Serializable;
+
+public class Profile extends AppCompatActivity implements Serializable {
 DbAdapter DB = new DbAdapter(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
-        Intent intent = getIntent();
-        String ch = intent.getStringExtra("id");
 
+        Intent intent = getIntent();
+        Globals g = (Globals) intent.getSerializableExtra("cuser");
+        String ch = g.getCurrentUser();
 
         User u ;
         u = DB.getUser(ch);
@@ -29,12 +32,13 @@ DbAdapter DB = new DbAdapter(this);
         TextView t3 = findViewById(R.id.InputProfileAnswers);
         TextView t4 = findViewById(R.id.InputProfilePercentage);
 
-        Toast.makeText(getApplicationContext(),u.getUsername(),Toast.LENGTH_SHORT).show();
-
         t1.setText(u.getUsername());
         t2.setText(String.valueOf(u.getNbAnsweredQuestions()));
         t3.setText(String.valueOf(u.getNbCorrectAnswers()));
 
+        int x = (int) (((double) u.getNbCorrectAnswers() / (double) u.getNbAnsweredQuestions()) * 100);
+
+        t4.setText(String.valueOf(x)+"%");
 
 
     }

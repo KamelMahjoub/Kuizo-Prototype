@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class Login extends AppCompatActivity {
+    DbAdapter DB = new DbAdapter(this);
 
 
     @Override
@@ -32,11 +33,28 @@ public class Login extends AppCompatActivity {
                 if(checkInputs())
                 {
                     EditText textUsername = findViewById(R.id.InputLoginUsername);
+                    EditText textPassword = findViewById(R.id.InputLoginPassword);
                     String Username = textUsername.getText().toString();
-
-                    Intent intent = new Intent(view.getContext(),Menu.class);
-                     intent.putExtra("user",Username);
-                     view.getContext().startActivity(intent);
+                    String Password = textPassword.getText().toString();
+                    if(DB.checkUserHasAccount(Username,Password))
+                    {
+                        Intent intent = new Intent(view.getContext(),Menu.class);
+                        intent.putExtra("user",Username);
+                        view.getContext().startActivity(intent);
+                    }
+                    else
+                    {
+                        AlertDialog alertDialog = new AlertDialog.Builder(Login.this).create();
+                        alertDialog.setTitle("Warning");
+                        alertDialog.setMessage("Wrong username or password !");
+                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Okay",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialog.show();
+                    }
                 }
                 else
                 {

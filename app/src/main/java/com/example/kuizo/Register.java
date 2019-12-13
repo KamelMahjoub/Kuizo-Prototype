@@ -36,18 +36,34 @@ public class Register extends AppCompatActivity {
                         EditText e2 = findViewById(R.id.InputRegisterPassword);
                         String Username = e1.getText().toString();
                         String Password = e2.getText().toString();
-                        User u = new User();
-                        u.setUsername(Username);
-                        u.setPassword(Password);
-                        DB.addUser(u);
-                        Intent intent = new Intent(view.getContext(), Profile.class);
-                        intent.putExtra("id",Username);
-                        view.getContext().startActivity(intent);
+                        if(DB.checkUserExists(Username))
+                        {
+                            AlertDialog alertDialog = new AlertDialog.Builder(Register.this).create();
+                            alertDialog.setTitle("Error");
+                            alertDialog.setMessage("Username exists already !");
+                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Okay",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                            alertDialog.show();
+                        }
+                        else
+                        {
+                            User u = new User();
+                            u.setUsername(Username);
+                            u.setPassword(Password);
+                            DB.addUser(u);
+                            Intent intent = new Intent(view.getContext(), Menu.class);
+                            intent.putExtra("user",Username);
+                            view.getContext().startActivity(intent);
+                        }
                     }
                     else
                     {
                         AlertDialog alertDialog = new AlertDialog.Builder(Register.this).create();
-                        alertDialog.setTitle("Warning");
+                        alertDialog.setTitle("Error");
                         alertDialog.setMessage("Passwords doesn't match !");
                         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Okay",
                                 new DialogInterface.OnClickListener() {

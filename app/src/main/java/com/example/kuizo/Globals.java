@@ -1,6 +1,8 @@
 package com.example.kuizo;
 
-public class Globals {
+import java.io.Serializable;
+
+public class Globals implements Serializable {
 
     public String currentUser;
 
@@ -12,4 +14,7 @@ public class Globals {
     public void setCurrentUser(String currentUser) {
         this.currentUser = currentUser;
     }
+
+
+
 }

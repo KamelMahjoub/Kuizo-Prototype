@@ -12,37 +12,67 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/TextPlayScore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:layout_marginRight="50dp"
-            android:textColor="#000000"
-            android:textSize="30sp"
-            android:layout_gravity="right"
-            android:text="Score : " />
-
-        <TextView
-            android:id="@+id/TextPlayQuestion"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:layout_marginTop="100dp"
-            android:textColor="#000000"
-            android:text="Exemple de question?" />
+            android:background="@drawable/border"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/TextPlayQsId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:text=""
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/TextPlayScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:text="  Score :   "
+                android:textSize="30sp" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="80dp"
+            android:layout_height="220dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/border"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/TextPlayQuestion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text=""
+                android:textSize="30sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/BtnTrue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/roundbuttontrue"
                 android:layout_weight="1"
+                android:layout_marginLeft="30dp"
                 android:text="True" />
 
             <Button
@@ -50,7 +80,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/roundbuttonfalse"
                 android:text="False" />
         </LinearLayout>
+
     </LinearLayout>
+
 </RelativeLayout>
