@@ -14,10 +14,6 @@ import android.widget.Toast;
 public class Login extends AppCompatActivity {
 
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +31,12 @@ public class Login extends AppCompatActivity {
 
                 if(checkInputs())
                 {
-                     Toast.makeText(getApplicationContext(),"True", Toast.LENGTH_SHORT).show();
+                    EditText textUsername = findViewById(R.id.InputLoginUsername);
+                    String Username = textUsername.getText().toString();
+
+                    Intent intent = new Intent(view.getContext(),Menu.class);
+                     intent.putExtra("user",Username);
+                     view.getContext().startActivity(intent);
                 }
                 else
                 {
